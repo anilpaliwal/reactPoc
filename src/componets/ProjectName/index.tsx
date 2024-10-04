@@ -13,7 +13,7 @@ export default function ProjectName() {
 
     return (
         <div  {...stylex.props(styles.dropdownContainer)}>
-            <label {...stylex.props(styles.label)} htmlFor='projectName'>Project Name</label>
+            <p {...stylex.props(styles.label)}>Project Name</p>
             <select
                 value={selectedApp}
                 onChange={handleSelectChange}

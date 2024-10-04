@@ -8,9 +8,9 @@ type Props = {
 const InputField = ({ label }: Props) => {
     return (
         <div  {...stylex.props(styles.inputContainer)} >
-            <label {...stylex.props(styles.label)} htmlFor="name">
+            <p {...stylex.props(styles.label)}>
                 {label}
-            </label>
+            </p>
             <input
                 {...stylex.props(styles.input)}
                 type="text"

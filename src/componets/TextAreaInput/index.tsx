@@ -9,9 +9,9 @@ type Props = {
 const TextAreaInput = ({ label }: Props) => {
     return (
         <div  {...stylex.props(styles.inputContainer)} >
-            <label {...stylex.props(styles.label)} htmlFor="name">
+            <p {...stylex.props(styles.label)}>
                 {label}
-            </label>
+            </p>
             <textarea rows={5} wrap='soft'
                 {...stylex.props(styles.input)}
                 placeholder={`Enter ${label.toLowerCase()} here`}
