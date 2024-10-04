@@ -20,7 +20,7 @@ export default function ProjectName() {
                 {...stylex.props(styles.dropdown)}
             >
                 {projects.map((one) => (
-                    <option {...stylex.props(styles.option)} value={one}>{one}</option>
+                    <option key={one} {...stylex.props(styles.option)} value={one}>{one}</option>
                 ))}
 
             </select>

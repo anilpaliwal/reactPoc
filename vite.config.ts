@@ -4,8 +4,4 @@ import styleX from "vite-plugin-stylex"
 
 export default defineConfig({
   plugins: [react(), styleX()],
-  base: "/reactPoc",
-  build: {
-    outDir: 'dist'
-  }
 })
