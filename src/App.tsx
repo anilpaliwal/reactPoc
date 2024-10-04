@@ -78,7 +78,7 @@ const styles = stylex.create({
     flexDirection: 'column',
   },
   clearBtn: {
-    background: '#fff',
+    backgroundColor: '#fff',
     color: '#3e450f',
     width: '150px',
     marginRight: '10px',
@@ -88,9 +88,9 @@ const styles = stylex.create({
     border: '1px solid #3e450f'
   },
   runBtn: {
-    background: '#3e450f',
+    backgroundColor: '#3e450f',
     color: '#fff',
-    width: '200px',
+    width: '160px',
     borderRadius: ' 2px',
     fontSize: '16px',
     fontWeight: '600',
