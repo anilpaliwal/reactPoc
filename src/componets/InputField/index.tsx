@@ -1,6 +1,4 @@
-import React from 'react';
 import * as stylex from '@stylexjs/stylex';
-
 
 type Props = {
     label: string

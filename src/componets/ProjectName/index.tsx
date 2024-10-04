@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import * as stylex from '@stylexjs/stylex';
 
 
@@ -7,7 +7,7 @@ const projects = ['OFA', 'ARMF', 'DWM']
 export default function ProjectName() {
     const [selectedApp, setSelectedApp] = useState('');
 
-    const handleSelectChange = (event) => {
+    const handleSelectChange = (event: any) => {
         setSelectedApp(event.target.value);
     };
 

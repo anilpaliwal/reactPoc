@@ -1,6 +1,6 @@
-import React, { useCallback, useState } from 'react'
+import { useCallback, useState } from 'react'
 import * as stylex from '@stylexjs/stylex';
-import { JsonView, allExpanded, darkStyles, defaultStyles } from 'react-json-view-lite';
+import { JsonView, allExpanded, defaultStyles } from 'react-json-view-lite';
 import 'react-json-view-lite/dist/index.css';
 import ProjectName from './componets/ProjectName'
 import InputField from './componets/InputField';
@@ -12,8 +12,7 @@ import TextAreaInput from './componets/TextAreaInput';
 function App() {
   const [query, setQuery] = useState("");
   const [result, setResult] = useState({})
-  const onChange = useCallback((val, viewUpdate) => {
-    console.log('val:', val);
+  const onChange = useCallback((val: string) => {
     setQuery(val);
   }, []);
 
