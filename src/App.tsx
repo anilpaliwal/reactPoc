@@ -94,6 +94,7 @@ const styles = stylex.create({
     borderRadius: ' 2px',
     fontSize: '16px',
     fontWeight: '600',
+    border: "1px solid transparent"
   },
   runbtnContainer: {
     display: 'flex',
