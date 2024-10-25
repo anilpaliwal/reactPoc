@@ -2,19 +2,23 @@ import * as stylex from '@stylexjs/stylex';
 
 
 type Props = {
-    label: string
+    label: string;
+    value: string;
+    onChangeText: (newValue: string) => void;
 }
 
 
-const TextAreaInput = ({ label }: Props) => {
+const TextAreaInput = ({ label, value, onChangeText }: Props) => {
     return (
         <div  {...stylex.props(styles.inputContainer)} >
             <p {...stylex.props(styles.label)}>
                 {label}
             </p>
             <textarea rows={5} wrap='soft'
+                value={value}
                 {...stylex.props(styles.input)}
                 placeholder={`Enter ${label.toLowerCase()} here`}
+                onChange={(event) => onChangeText(event.target.value)}
             />
         </div>
     );

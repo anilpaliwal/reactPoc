@@ -1,38 +1,41 @@
 import { useState, useEffect } from 'react'
 import * as stylex from '@stylexjs/stylex';
 
-
 type Props = {
+    projectId: string;
     value: string;
-    onSelect: (id: string) => void;
+    onSelect: (newValue: string) => void;
 }
 
-export default function ProjectName({ onSelect, value }: Props) {
-    const [projects, setProjects] = useState([])
+export default function MantisIdDropDown({ projectId, value, onSelect }: Props) {
+    const [mantisIds, setMantisIds] = useState([])
 
     useEffect(() => {
-        fetch('http://172.16.40.130:8080/api/projects',)
-            .then(response => response.json())
-            .then(data => {
-                setProjects(data)
-            })
-            .catch(error => console.error(error));
-    }, [])
+        if (projectId) {
+            fetch(`http://172.16.40.130:8080/api/mantis/${projectId}`,)
+                .then(response => response.json())
+                .then(data => {
+                    setMantisIds(data)
+                })
+                .catch(error => console.error(error));
+        }
+
+    }, [projectId])
     const handleSelectChange = (event: any) => {
-        onSelect(event.target.value)
+        onSelect(event.target.value);
     };
 
     return (
         <div  {...stylex.props(styles.dropdownContainer)}>
-            <p {...stylex.props(styles.label)}>Project Name</p>
+            <p {...stylex.props(styles.label)}>MantisId</p>
             <select
                 value={value}
                 onChange={handleSelectChange}
                 {...stylex.props(styles.dropdown)}
             >
-                <option key={"select-project"} {...stylex.props(styles.option)} value={""}>Select Project</option>
-                {projects.map((one: any) => (
-                    <option key={one.name} {...stylex.props(styles.option)} value={one.id}>{one.name}</option>
+                <option key={"select-mantis-id"} {...stylex.props(styles.option)} value={""}>Select Mantis Id</option>
+                {mantisIds.map((one: any) => (
+                    <option key={one.mantisId} {...stylex.props(styles.option)} value={one.mantisId}>{one.mantisId}</option>
                 ))}
 
             </select>

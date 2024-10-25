@@ -3,35 +3,68 @@ import * as stylex from '@stylexjs/stylex';
 import { JsonView, allExpanded, defaultStyles } from 'react-json-view-lite';
 import 'react-json-view-lite/dist/index.css';
 import ProjectName from './componets/ProjectName'
-import InputField from './componets/InputField';
 import CodeMirror from '@uiw/react-codemirror';
 import { languages } from '@codemirror/language-data';
 import { markdown, markdownLanguage } from '@codemirror/lang-markdown';
 import TextAreaInput from './componets/TextAreaInput';
+import MantisIdDropDown from './componets/MantisIdDropDown';
 
 function App() {
   const [query, setQuery] = useState("");
   const [result, setResult] = useState({})
+  const [selectedProjectId, setSelectedProjectId] = useState("")
+  const [selectedMatisId, setSelectedMatisId] = useState("")
+  const [reason, setReason] = useState("")
+
   const onChange = useCallback((val: string) => {
     setQuery(val);
   }, []);
 
 
   const executeQuery = () => {
-    fetch('https://jsonplaceholder.typicode.com/users')
-      .then(response => response.json())
-      .then(data => {
-        console.log({ data })
-        setResult(data)
+    if (!selectedProjectId || !selectedMatisId || !reason || !query) {
+      let message = ""
+      if (!selectedProjectId) {
+        message = 'Please select the Project'
+      } else if (!selectedMatisId) {
+        message = 'Please select the Mantis Id'
+      } else if (!reason.trim()) {
+        message = 'Please enter the Reason'
+      } else {
+        message = 'Please ennter the Query'
+      }
+      alert(message)
+      return
+    }
+
+    console.log({
+      mantisId: selectedMatisId,
+      reason: reason,
+      runQuery: query
+    })
+    fetch('http://172.16.40.130:8080/api/mantis-integration/postMantisIntegration', {
+      method: 'POST',
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        mantisId: selectedMatisId,
+        reason: reason,
+        runQuery: query
       })
-      .catch(error => console.error(error));
+    }).then((res) => res.text()).then((response) => setResult({ response }))
   }
   return (
     <div {...stylex.props(styles.container)}>
       <div {...stylex.props(styles.inputContainer)}>
-        <ProjectName />
-        <InputField label='Mantis ID' />
-        <TextAreaInput label='Reason' />
+        <ProjectName onSelect={setSelectedProjectId} value={selectedProjectId} />
+        {!!selectedProjectId &&
+          <>
+            <MantisIdDropDown projectId={selectedProjectId} value={selectedMatisId} onSelect={setSelectedMatisId} />
+            <TextAreaInput label='Reason' onChangeText={setReason} value={reason} />
+          </>
+        }
+
       </div>
       <div {...stylex.props(styles.main)}>
         <div {...stylex.props(styles.queryContainer)} >
